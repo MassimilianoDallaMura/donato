@@ -22,7 +22,6 @@ import java.util.List;
 @Configuration
 @EnableWebSecurity(debug = true)
 @EnableMethodSecurity
-
 public class Config {
 
     @Bean
@@ -30,14 +29,12 @@ public class Config {
         httpSecurity.formLogin(http -> http.disable());
         httpSecurity.csrf(http -> http.disable());
         httpSecurity.sessionManagement(http -> http.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-//        httpSecurity.cors(Customizer.withDefaults());
+        httpSecurity.cors(Customizer.withDefaults());
 
         httpSecurity.authorizeHttpRequests(http -> http.requestMatchers("/api/**").permitAll());
-
-
         httpSecurity.authorizeHttpRequests(http -> http.requestMatchers(HttpMethod.POST, "/auth/**").permitAll());
 
-        //nega l'accesso a qualsiasi servizio che non sia get e path /api/users
+        // nega l'accesso a qualsiasi servizio che non sia GET e path /api/users
         httpSecurity.authorizeHttpRequests(http -> http.anyRequest().authenticated());
         return httpSecurity.build();
     }
@@ -47,11 +44,10 @@ public class Config {
         return new BCryptPasswordEncoder();
     }
 
-
     @Bean
     public CorsFilter corsFilter() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.setAllowedOrigins(List.of("http://localhost:4200", "https://app-donato.web.app"));//"https://distinct-josefa-massimilianodm-55a6219c.koyeb.app"));
+        corsConfiguration.setAllowedOrigins(List.of("http://localhost:4200", "https://app-donato.web.app", "https://distinct-josefa-massimilianodm-55a6219c.koyeb.app"));
         corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"));
         corsConfiguration.setAllowedHeaders(List.of("*"));
         corsConfiguration.setAllowCredentials(true); // Se vuoi permettere l'invio di cookie
