@@ -34,6 +34,7 @@ public class Config {
         httpSecurity.authorizeHttpRequests(http -> http.requestMatchers("/api/**").permitAll());
         httpSecurity.authorizeHttpRequests(http -> http.requestMatchers(HttpMethod.POST, "/auth/**").permitAll());
 
+
         // nega l'accesso a qualsiasi servizio che non sia GET e path /api/users
         httpSecurity.authorizeHttpRequests(http -> http.anyRequest().authenticated());
         return httpSecurity.build();
