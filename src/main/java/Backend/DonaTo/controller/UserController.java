@@ -28,9 +28,6 @@ public class UserController {
     // ESTRAE TUTTI GLI USER
 
 
-
-
-
     // MODIFICA USER
     @GetMapping("/api/users")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'NORMAL_USER')")

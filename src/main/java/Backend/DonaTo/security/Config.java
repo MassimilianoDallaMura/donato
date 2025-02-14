@@ -30,7 +30,7 @@ public class Config {
         httpSecurity.formLogin(http -> http.disable());
         httpSecurity.csrf(http -> http.disable());
         httpSecurity.sessionManagement(http -> http.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-        httpSecurity.cors(Customizer.withDefaults());
+//        httpSecurity.cors(Customizer.withDefaults());
 
         httpSecurity.authorizeHttpRequests(http -> http.requestMatchers("/api/**").permitAll());
 
@@ -57,8 +57,6 @@ public class Config {
         corsConfiguration.setAllowCredentials(true); // Se vuoi permettere l'invio di cookie
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", corsConfiguration);
-        source.registerCorsConfiguration("/register", corsConfiguration); // Aggiungi questa linea
-
 
         return new CorsFilter(source);
     }
